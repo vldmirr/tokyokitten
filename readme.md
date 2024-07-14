@@ -3,13 +3,18 @@
 RESTful Api with using [GORM](https://gorm.io/). Data for connection in database written ```env.go``` location in folder ```config```. The project also involves [Postgres](https://www.postgresql.org/)
 ## endpoints 
 - POST /api/kittens__(id)__
+
+response:
 ```json
 {
     "code": 200,
     "status": "Ok"
 }
 ```
+
 - GET /api/kittens
+
+response:
 ```json
 {
     "code": 200,
@@ -23,7 +28,10 @@ RESTful Api with using [GORM](https://gorm.io/). Data for connection in database
     ]
 }
 ```
+
 - GET /api/kittens/__(id)__
+
+response:
 ```json 
 {
     "code": 200,
@@ -36,6 +44,8 @@ RESTful Api with using [GORM](https://gorm.io/). Data for connection in database
 ```
 
 - DELETE /api/kittens/__(id)__
+
+response:
 ```json
 {
     "code": 200,
