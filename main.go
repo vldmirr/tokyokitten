@@ -31,7 +31,7 @@ func main() {
 	db.Table("kittens").AutoMigrate(&model.Kitten{})
 
 	// Repository
-	kittensRepository := repository.NewkittensRepositoryImpl(db)
+	kittensRepository := repository.NewKittensRepositoryImpl(db)
 
 	// Service
 	kittensService := service.NewKittensServiceImpl(kittensRepository, validate)

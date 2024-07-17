@@ -13,7 +13,7 @@ type KittenRepositoryImpl struct {
 	Db *gorm.DB
 }
 
-func NewkittensRepositoryImpl(Db *gorm.DB) KittensRepository {
+func NewKittensRepositoryImpl(Db *gorm.DB) KittensRepository {
 	return &KittenRepositoryImpl{Db: Db}
 }
 
