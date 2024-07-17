@@ -1,0 +1,127 @@
+basePath: /api
+definitions:
+  request.CreateKittensRequest:
+    properties:
+      age:
+        maximum: 200
+        minimum: 1
+        type: integer
+      breed:
+        maxLength: 200
+        minLength: 1
+        type: string
+      color:
+        maxLength: 200
+        minLength: 1
+        type: string
+      count:
+        type: integer
+      in_stock:
+        type: boolean
+      name:
+        maxLength: 200
+        minLength: 1
+        type: string
+      price:
+        maximum: 200
+        minimum: 1
+        type: number
+    required:
+    - age
+    - breed
+    - color
+    - name
+    - price
+    type: object
+  response.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      status:
+        type: string
+    type: object
+host: localhost:8088
+info:
+  contact: {}
+  description: A Kitten service API in Go using Gin framework
+  title: Kitten Service API
+  version: "1.0"
+paths:
+  /kittens:
+    get:
+      description: Return list of kittens.
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: obejct
+      summary: Get All kittens.
+    post:
+      description: Save kittens data in Db.
+      parameters:
+      - description: Create kittens
+        in: body
+        name: kittens
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateKittensRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Create kittens
+  /kittens/{kittenID}:
+    delete:
+      description: Remove kittens data by id.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Delete kittens
+    patch:
+      description: Update kittens data.
+      parameters:
+      - description: update kittens by id
+        in: path
+        name: kittenId
+        required: true
+        type: string
+      - description: Update kittens
+        in: body
+        name: kittens
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateKittensRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Update kittens
+  /kittens/{kittenId}:
+    get:
+      description: Return the tahs whoes kittenId valu mathes id.
+      parameters:
+      - description: update kittens by id
+        in: path
+        name: kittenId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Get Single kittens by id.
+swagger: "2.0"
