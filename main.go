@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "tokyokitten/docs"
 	"tokyokitten/config"
 	"tokyokitten/controller"
 	"tokyokitten/helper"
@@ -14,11 +15,11 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-// @title 	Tag Service API
+// @title 	Kitten Service API
 // @version	1.0
-// @description A Tag service API in Go using Gin framework
+// @description A Kitten service API in Go using Gin framework
 
-// @host 	localhost:8888
+// @host 	localhost:8088
 // @BasePath /api
 func main() {
 
@@ -36,7 +37,7 @@ func main() {
 	kittensService := service.NewKittensServiceImpl(kittensRepository, validate)
 
 	// Controller
-	kittensController := controller.NewkittensController(kittensService)
+	kittensController := controller.NewKittensController(kittensService)
 
 	// Router
 	routes := router.NewRouter(kittensController)
