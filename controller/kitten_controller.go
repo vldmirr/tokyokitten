@@ -25,9 +25,9 @@ func NewKittensController(service service.KittensService) *KittensController {
 // Createkittens		godoc
 // @Summary			Create kittens
 // @Description		Save kittens data in Db.
-// @Param			kittens body request.CreateKittensRequest true "Create kittens"
+// @Param			kittens body request.CreatekittensRequest true "Create kittens"
 // @Produce			application/json
-// @Kittens			kittens
+// @kittens			kittens
 // @Success			200 {object} response.Response{}
 // @Router			/kittens [post]
 func (controller *KittensController) Create(ctx *gin.Context) {
@@ -49,12 +49,12 @@ func (controller *KittensController) Create(ctx *gin.Context) {
 // Updatekittens		godoc
 // @Summary			Update kittens
 // @Description		Update kittens data.
-// @Param			kittenId path string true "update kittens by id"
-// @Param			kittens body request.CreateKittensRequest true  "Update kittens"
-// @Kittens			kittens
+// @Param			tagId path string true "update kittens by id"
+// @Param			kittens body request.CreatekittensRequest true  "Update kittens"
+// @kittens			kittens
 // @Produce			application/json
 // @Success			200 {object} response.Response{}
-// @Router			/kittens/{kittenID} [patch]
+// @Router			/kittens/{tagId} [patch]
 func (controller *KittensController) Update(ctx *gin.Context) {
 	log.Info().Msg("update kittens")
 	updatekittensRequest := request.UpdateKittensRequest{}
@@ -81,9 +81,9 @@ func (controller *KittensController) Update(ctx *gin.Context) {
 // @Summary			Delete kittens
 // @Description		Remove kittens data by id.
 // @Produce			application/json
-// @Kittens			kittens
+// @kittens			kittens
 // @Success			200 {object} response.Response{}
-// @Router			/kittens/{kittenID} [delete]
+// @Router			/kittens/{tagID} [delete]
 func (controller *KittensController) Delete(ctx *gin.Context) {
 	log.Info().Msg("delete kittens")
 	kittenId := ctx.Param("kittenId")
@@ -102,12 +102,12 @@ func (controller *KittensController) Delete(ctx *gin.Context) {
 
 // FindByIdkittens 		godoc
 // @Summary				Get Single kittens by id.
-// @Param				kittenId path string true "update kittens by id"
-// @Description			Return the tahs whoes kittenId valu mathes id.
+// @Param				tagId path string true "update kittens by id"
+// @Description			Return the tahs whoes tagId valu mathes id.
 // @Produce				application/json
-// @Kittens				kittens
+// @kittens				kittens
 // @Success				200 {object} response.Response{}
-// @Router				/kittens/{kittenId} [get]
+// @Router				/kittens/{tagId} [get]
 func (controller *KittensController) FindById(ctx *gin.Context) {
 	log.Info().Msg("findbyid kittens")
 	kittenId := ctx.Param("kittenId")
@@ -128,16 +128,16 @@ func (controller *KittensController) FindById(ctx *gin.Context) {
 // FindAllkittens 		godoc
 // @Summary			Get All kittens.
 // @Description		Return list of kittens.
-// @Kittens			kittens
+// @kittens			kittens
 // @Success			200 {obejct} response.Response{}
 // @Router			/kittens [get]
 func (controller *KittensController) FindAll(ctx *gin.Context) {
 	log.Info().Msg("findAll kittens")
-	kittenResponse := controller.kittensService.FindAll()
+	tagResponse := controller.kittensService.FindAll()
 	webResponse := response.Response{
 		Code:   http.StatusOK,
 		Status: "Ok",
-		Data:   kittenResponse,
+		Data:   tagResponse,
 	}
 	ctx.Header("Content-Type", "application/json")
 	ctx.JSON(http.StatusOK, webResponse)
