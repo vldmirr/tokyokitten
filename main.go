@@ -19,7 +19,7 @@ import (
 // @version	1.0
 // @description A Kitten service API in Go using Gin framework
 
-// @host 	localhost:8088
+// @host 	localhost:8888
 // @BasePath /api
 func main() {
 
