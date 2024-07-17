@@ -6,10 +6,15 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	swaggerFiles "github.com/swaggo/files"
 )
 
 func NewRouter(kittensController *controller.KittensController) *gin.Engine {
 	router := gin.Default()
+
+	//swagger
+	router.GET("/docs/*any",ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	router.GET("", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, "welcome home")
