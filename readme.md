@@ -56,7 +56,7 @@ response:
 ## to-do:
 - Auto delete if __InStock__ is 0
 
-## complete:
+## done:
 
 1. added swagger, to configure it, based on the [documentation](https://pkg.go.dev/github.com/swaggo/gin-swagger), you need to edit the comments  in __main.go__ and __kitten_controller.go__.Then initialize swagger:
     ```
