@@ -5,14 +5,14 @@ package model
 // Kitten represents a kitten in the store.
 type Kitten struct {
 	//gorm.Model //create col(create_at,update_at,delete_at)
-	Id      int    `gorm:"type:int;primaryKey"`
-	Name    string 
+	Id      int `gorm:"type:int;primaryKey"`
+	Name    string
 	Age     int
 	Color   string
 	Breed   string
 	Price   float64
-	Count	uint
-	InStock bool 
+	Count   uint
+	InStock bool
 	// Category Category
 }
 
@@ -26,9 +26,9 @@ type Kitten struct {
 // 	Name string `gorm:"unique;not null"`
 // }
 
-// Order represents an order made for kittens.
+//Order represents an order made for kittens.
 // type Order struct {
-// 	gorm.Model
+// 	//gorm.Model
 // 	KittenID uint
 // 	Kitten   Kitten
 // 	Quantity int
@@ -36,10 +36,11 @@ type Kitten struct {
 // }
 
 // // User represents a user who can place orders.
-// type User struct {
-// 	gorm.Model
-// 	Name     string `gorm:"unique;not null"`
-// 	Email    string `gorm:"unique;not null"`
-// 	Password string
-// 	Orders   []Order
-// }
+type User struct {
+	//gorm.Model
+	Id       int    `gorm:"type:int;primaryKey"`
+	Username string `gorm:"type:varchar(255);not null"`
+	Email    string `gorm:"uniqueIndex;not null"`
+	Password string `gorm:"not null"`
+	//Orders   []Order
+}
