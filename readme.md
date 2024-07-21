@@ -68,3 +68,5 @@ response:
 
 3. also, to protect user passwords, a [JWT Token](https://datatracker.ietf.org/doc/html/rfc7519) is used 
 
+4. replaced __env.go__ with __app.env__ to implement database connection
+
