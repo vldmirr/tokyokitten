@@ -9,10 +9,11 @@ import (
 	"tokyokitten/repository"
 	"tokyokitten/router"
 	"tokyokitten/service"
+	"log"
 	"net/http"
+	"time"
 
 	"github.com/go-playground/validator/v10"
-	"github.com/rs/zerolog/log"
 )
 
 // @title 	Kitten Service API
@@ -23,30 +24,45 @@ import (
 // @BasePath /api
 func main() {
 
-	log.Info().Msg("Started Server!")
+	loadConfig, err := config.LoadConfig(".")
+	if err != nil {
+		log.Fatal("🚀 Could not load environment variables", err)
+	}
+
 	// Database
-	db := config.DBConnetion()
+	db := config.DBConnetion(&loadConfig)
 	validate := validator.New()
 
 	db.Table("kittens").AutoMigrate(&model.Kitten{})
+	db.Table("users").AutoMigrate(&model.User{})
 
-	// Repository
+	// Init Repository
+	userRepository:=repository.NewUsersRepositoryImpl(db)
 	kittensRepository := repository.NewKittensRepositoryImpl(db)
 
 	// Service
+	authenticationService := service.NewAuthenticationServiceImpl(userRepository, validate)
 	kittensService := service.NewKittensServiceImpl(kittensRepository, validate)
 
 	// Controller
 	kittensController := controller.NewKittensController(kittensService)
+	authenticationController := controller.NewAuthenticationController(authenticationService)
+	usersController := controller.NewUsersController(userRepository)
 
 	// Router
-	routes := router.NewRouter(kittensController)
+	routes := router.NewRouter(userRepository, 
+		authenticationController, 
+		usersController, 
+		kittensController)
 
 	server := &http.Server{
-		Addr:    ":8888",
-		Handler: routes,
+		Addr:           ":" + loadConfig.ServerPort,
+		Handler:        routes,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
 	}
 
-	err := server.ListenAndServe()
-	helper.ErrorPanic(err)
+	server_err:= server.ListenAndServe()
+	helper.ErrorPanic(server_err)
 }
