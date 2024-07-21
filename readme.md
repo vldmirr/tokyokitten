@@ -54,7 +54,9 @@ response:
 ```
 
 ## to-do:
+- Add Redis
 - Auto delete if __InStock__ is 0
+
 
 ## done:
 
@@ -62,3 +64,7 @@ response:
     ```
     swag init
     ```
+2. the functions login and user registration have been implemented
+
+3. also, to protect user passwords, a [JWT Token](https://datatracker.ietf.org/doc/html/rfc7519) is used 
+
