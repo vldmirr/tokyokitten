@@ -7,7 +7,7 @@ import (
 	"tokyokitten/data/response"
 	"tokyokitten/helper"
 	"tokyokitten/service"
-
+	"tokyokitten/config"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
 )
@@ -22,6 +22,8 @@ func NewKittensController(service service.KittensService) *KittensController {
 	}
 }
 
+
+
 // Createkittens		godoc
 // @Summary			Create kittens
 // @Description		Save kittens data in Db.
@@ -35,6 +37,24 @@ func (controller *KittensController) Create(ctx *gin.Context) {
 	createkittensRequest := request.CreateKittensRequest{}
 	err := ctx.ShouldBindJSON(&createkittensRequest)
 	helper.ErrorPanic(err)
+	
+	kittenId := ctx.Param("kittenId")
+
+	redisClient:=config.NewRedisClient("localhost:6379", "", 0)
+	cacheErr:=redisClient.Set(ctx,kittenId,createkittensRequest.Name,0).Err()
+	helper.ErrorPanic(cacheErr)
+
+	// // Check if the cache key exists
+	// cachedValue, err := redisClient.Get(ctx, kittenId).Result()
+	// if err != nil {
+	// 	log.Error().Err(err).Msg("Error retrieving cached value")
+	// }
+	// if cachedValue != "" {
+	// 	log.Info().Msgf("Cached value: %s", cachedValue)
+	// } else {
+	// 	log.Info().Msg("No cached value found")
+	// }
+
 
 	controller.kittensService.Create(createkittensRequest)
 	webResponse := response.Response{
