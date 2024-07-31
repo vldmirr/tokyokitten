@@ -1,9 +1,10 @@
 package router
 
 import (
+	"tokyokitten/config"
 	"tokyokitten/controller"
 	"tokyokitten/middleware"
-
+	"time"
 	"net/http"
 	"tokyokitten/repository"
 
@@ -16,7 +17,10 @@ func NewRouter(userRepository repository.UsersRepository,
 	authenticationController *controller.AuthenticationController,
 	usersController *controller.UserController,
 	kittensController *controller.KittensController) *gin.Engine {
+	
 	router := gin.Default()
+	redisClient := config.NewRedisClient("localhost:6379", "", 0)
+	router.Use(middleware.Cache(1*time.Hour,redisClient))
 
 	//swagger
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
