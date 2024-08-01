@@ -54,7 +54,7 @@ response:
 ```
 
 ## to-do:
-- Add Redis
+- ~~Add Redis~~
 - Auto delete if __InStock__ is 0
 
 
@@ -70,3 +70,8 @@ response:
 
 4. replaced __env.go__ with __app.env__ to implement database connection
 
+5. __Caching__
+Added controller level caching.Caching at the controller level provides several benefits:
+    - Reduces the number of database queries
+    - Improves response times
+    - Reduces the load on the database
