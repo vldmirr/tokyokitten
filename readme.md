@@ -53,6 +53,7 @@ response:
 }
 ```
 - PATCH(UPDATE) /api/kittens/__(id)__
+  
 input format:
 ```
 {
