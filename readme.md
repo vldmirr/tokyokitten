@@ -55,9 +55,9 @@ response:
 - PATCH(UPDATE) /api/kittens/__(id)__
   
 input format:
-```
+```json
 {
-	"name": "Murka",
+    "name": "Murka",
     "age":35,
     "color":"black",
     "breed":"Jopan",
