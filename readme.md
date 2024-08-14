@@ -52,10 +52,26 @@ response:
     "status": "Ok"
 }
 ```
+- PATCH(UPDATE) /api/kittens/__(id)__
+input format:
+```
+{
+	"name": "Murka",
+    "age":35,
+    "color":"black",
+    "breed":"Jopan",
+    "price": 50.5,
+    "count": 4
+}
+```
 
-## to-do:
-- ~~Add Redis~~
-- Auto delete if __InStock__ is 0
+response:
+```json
+{
+    "code": 200,
+    "status": "Ok"
+}
+```
 
 
 ## done:
